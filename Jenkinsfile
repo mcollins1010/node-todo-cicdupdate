@@ -8,14 +8,14 @@ pipeline {
     }
         stage('Build'){
             steps{
-            sh 'docker build -t collinzo1010/nodeto:latest .'
+                    sh 'docker build -t collinzo1010/nodeto:latest .'
         }
     }
         stage('Push'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                     sh 'docker push collinzo1010/nodeto:latest'
+                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh "docker push collinzo1010/nodeto:latest"
                 }
             }
         }
